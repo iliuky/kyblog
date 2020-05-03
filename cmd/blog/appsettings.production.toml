@@ -1,0 +1,2 @@
+[HTTPServer]
+    addr = "localhost:80"
