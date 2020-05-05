@@ -20,6 +20,7 @@ func main() {
 	app.UseEndpoints(func(route *gin.Engine) {
 		http.InitHTTP(srv)
 		http.InitRouting(route)
+		http.InitResources(route)
 	})
 	app.Start()
 	app.Signal(func() {

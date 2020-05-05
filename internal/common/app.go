@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -21,12 +22,14 @@ var Logger *zap.Logger
 
 // App config
 type App struct {
-	Name        string
-	Description string
-	Config      *BaseAppSettings
-	Logger      *zap.Logger
-	_engine     *gin.Engine
-	_srv        *http.Server
+	// Name             string
+	// Description      string
+	Environment      string
+	CurrentDirectory string
+	Config           *BaseAppSettings
+	Logger           *zap.Logger
+	_engine          *gin.Engine
+	_srv             *http.Server
 }
 
 // 路由配置委托
@@ -36,10 +39,16 @@ type exitFunc func()
 // NewApp 创建app
 func NewApp(config *BaseAppSettings) *App {
 	app := &App{
-		Logger:  InitLogger("blog"),
-		_engine: initGin(),
-		Config:  config,
+		Logger:      InitLogger("blog"),
+		_engine:     initGin(),
+		Config:      config,
+		Environment: strings.ToLower(os.Getenv("ENVIRONMENT")),
 	}
+	app.CurrentDirectory, _ = os.Getwd()
+	if app.Environment == "" {
+		app.Environment = "development"
+	}
+
 	Application = app
 	Logger = app.Logger
 	return app
@@ -101,6 +110,16 @@ func (app *App) Signal(handle exitFunc) {
 			return
 		}
 	}
+}
+
+// IsDevelopment 是否开发环境
+func (app *App) IsDevelopment() bool {
+	return app.Environment == "development"
+}
+
+// IsProduction 是否生产环境
+func (app *App) IsProduction() bool {
+	return app.Environment == "production"
 }
 
 func initGin() *gin.Engine {

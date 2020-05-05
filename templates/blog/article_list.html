@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>我的博客</title>    
+    {{template "header"}}
+    <style>
+        h2{ font-family:arial, "微软雅黑"; font-weight: normal; font-size: 20px; margin: 1em 0 .5em; }
+        .tech-list{ margin-top:30px;}
+        .tech-item span {float:right; color:#888; font-size: 14px; }
+        .tech-item {line-height: 36px;border-bottom: 1px dotted #ddd;font-family: "微软雅黑";font-size: 16px;margin-left:2em;text-indent:4px;}
+    </style>
+</head>
+<body>
+    {{template "top"}}
+
+    <article id="app">        
+        <h2 class="page-title">关于博客</h2>        
+        <div class="notice">技术博客。分享工作生活中遇到的一些点点滴滴。</div>        
+        <div class="tech-list">  
+        {{ with .ArticleTypes }}
+        {{ range . }}
+        <div class="tech">
+            <h2>{{ .TypeName }}</h2>
+            {{ with .Articles }}
+            {{ range . }}
+            <div class="tech-item">
+                <span>{{ .Date }}</span>
+                <a href="/tech/{{ .PinYin }}" target="_blank">{{ .Title }}</a>
+            </div>
+            {{ end }}
+            {{ end }}
+        </div>                
+        {{ end }}
+        {{ end }}
+        </div>        
+    </article>
+
+    {{template "footer"}}
+</body>
+</html>
+{{template "scripts"}}

@@ -3,6 +3,9 @@ package http
 import (
 	"kyblog/internal/blog/service"
 	"kyblog/internal/common"
+	"os"
+	"path"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -19,8 +22,22 @@ func InitHTTP(s *service.Service) {
 	srv = s
 }
 
+// InitResources 初始化静态资源
+func InitResources(router *gin.Engine) {
+	dir, _ := os.Getwd()
+	suffix := "\\cmd\\blog"
+	if strings.HasSuffix(dir, suffix) {
+		dir = dir[:len(dir)-len(suffix)]
+	}
+
+	tmplExp := path.Join(dir, "templates", "blog", "*")
+	publicExp := path.Join(dir, "public")
+	router.LoadHTMLGlob(tmplExp)
+	router.Static("/assets", publicExp)
+}
+
 // InitRouting 初始化路由
-func InitRouting(route *gin.Engine) {
-	route.GET("/", index)
-	route.GET("/article/types", articleTypes)
+func InitRouting(router *gin.Engine) {
+	router.GET("/", articles)
+	router.GET("/article/types", articleTypes)
 }

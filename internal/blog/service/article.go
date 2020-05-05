@@ -6,7 +6,7 @@ import "kyblog/internal/blog/model"
 func (s *Service) GetArticleAll() (list []*model.Article) {
 	db := s.DB
 
-	db.Where("status = ?", 0).Find(&list)
+	db.Where("status = ?", 0).Select("title, pin_yin, article_type, ctime").Order("ctime desc").Find(&list)
 	return
 }
 
@@ -14,6 +14,6 @@ func (s *Service) GetArticleAll() (list []*model.Article) {
 func (s *Service) GetArticleTypeAll() (list []*model.ArticleType) {
 	db := s.DB
 
-	db.Where("status = ?", 0).Find(&list)
+	db.Where("status = ?", 0).Order("sort desc").Find(&list)
 	return
 }
