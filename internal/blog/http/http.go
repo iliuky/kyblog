@@ -1,6 +1,7 @@
 package http
 
 import (
+	"kyblog/internal/blog/middleware"
 	"kyblog/internal/blog/service"
 	"kyblog/internal/common"
 	"os"
@@ -38,6 +39,9 @@ func InitResources(router *gin.Engine) {
 
 // InitRouting 初始化路由
 func InitRouting(router *gin.Engine) {
-	router.GET("/", articles)
-	router.GET("/article/types", articleTypes)
+	g := router.Group("/", middleware.PageStatic())
+	{
+		g.GET("/", articles)
+		g.GET("/article/types", articleTypes)
+	}
 }
