@@ -11,6 +11,7 @@
         .tech-item span {float:right; color:#888; font-size: 14px; }
         .tech-item {line-height: 36px;border-bottom: 1px dotted #ddd;font-family: "微软雅黑";font-size: 16px;margin-left:2em;text-indent:4px;}
     </style>
+    <link href="/assets/css/site.css" rel="stylesheet">
 </head>
 <body>
     {{template "top"}}
@@ -27,7 +28,7 @@
             {{ range . }}
             <div class="tech-item">
                 <span>{{ .Date }}</span>
-                <a href="/tech/{{ .PinYin }}" target="_blank">{{ .Title }}</a>
+                <a href="/a/{{ .PinYin }}" target="_blank">{{ .Title }}</a>
             </div>
             {{ end }}
             {{ end }}

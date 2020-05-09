@@ -26,11 +26,9 @@ var pageMap map[string]bool = make(map[string]bool)
 // PageStatic 页面静态化
 func PageStatic() gin.HandlerFunc {
 	pageMap["index"] = false
+	pageMap["a/haha1"] = false
 	return func(c *gin.Context) {
-		uri := c.FullPath()
-		if uri == "/" {
-			uri = "index"
-		}
+		uri := getStaticFilePath(c)
 		exists, ok := pageMap[uri]
 		if !ok {
 			c.Status(404)
@@ -59,4 +57,15 @@ func PageStatic() gin.HandlerFunc {
 			pageMap[uri] = true
 		}
 	}
+}
+
+func getStaticFilePath(c *gin.Context) string {
+	uri := c.FullPath()
+	if uri == "/" {
+		uri = "index"
+	}
+	if uri == "/a/:pinyin" {
+		uri = "a/" + c.Param("pinyin")
+	}
+	return uri
 }

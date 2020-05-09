@@ -37,8 +37,18 @@ func articles(c *gin.Context) {
 		}
 	}
 	// c.JSON(200, typeModels)
-	c.HTML(200, "article_list.html", viewmodel.ArticleListModel{
+	c.HTML(200, "article_list.html", &viewmodel.ArticleListModel{
 		ArticleTypes: &typeModels,
+	})
+}
+
+func articleDetail(c *gin.Context) {
+	pinyin := c.Param("pinyin")
+	article := srv.GetArticle(pinyin)
+
+	c.HTML(200, "article_detail.html", &viewmodel.ArticleDetailModel{
+		Article: *article,
+		Date:    time.Unix(article.CreateTime, 0).Format("2006-01-02"),
 	})
 }
 

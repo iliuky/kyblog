@@ -10,6 +10,14 @@ func (s *Service) GetArticleAll() (list []*model.Article) {
 	return
 }
 
+// GetArticle 获取文章详细
+func (s *Service) GetArticle(pinYin string) (article *model.Article) {
+	db := s.DB
+	article = &model.Article{}
+	db.First(article, "pin_yin = ?", pinYin)
+	return
+}
+
 // GetArticleTypeAll 获取文章分类
 func (s *Service) GetArticleTypeAll() (list []*model.ArticleType) {
 	db := s.DB

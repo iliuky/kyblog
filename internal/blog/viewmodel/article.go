@@ -1,5 +1,7 @@
 package viewmodel
 
+import "kyblog/internal/blog/model"
+
 // ArticleListModel 文章列表模型
 type ArticleListModel struct {
 	ArticleTypes *[]ArticleListTypeModel
@@ -17,4 +19,10 @@ type ArticleListItemModel struct {
 	Title  string
 	PinYin string
 	Date   string
+}
+
+// ArticleDetailModel 文章详细
+type ArticleDetailModel struct {
+	model.Article
+	Date string
 }

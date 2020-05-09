@@ -42,6 +42,7 @@ func InitRouting(router *gin.Engine) {
 	g := router.Group("/", middleware.PageStatic())
 	{
 		g.GET("/", articles)
-		g.GET("/article/types", articleTypes)
+		g.GET("/a/:pinyin", articleDetail)
+		// g.GET("/article/types", articleTypes)
 	}
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{{ .Title }}</title>    
+    {{template "header"}}
+    <style>
+        h2{ font-family:arial, "微软雅黑"; font-weight: normal; font-size: 20px; margin: 1em 0 .5em; }
+        .tech-list{ margin-top:30px;}
+        .tech-item span {float:right; color:#888; font-size: 14px; }
+        .tech-item {line-height: 36px;border-bottom: 1px dotted #ddd;font-family: "微软雅黑";font-size: 16px;margin-left:2em;text-indent:4px;}
+    </style>
+    <link href="/assets/css/article.css" rel="stylesheet">
+</head>
+<body>
+    {{template "top"}}
+
+    <article>
+        <h1>{{ .Title }}</h1>
+
+        <div class="info" id="info">
+            <span>{{ .Date }}</span>
+            <span>作者: lky</span>
+            <!-- <span>分类: </span>     -->
+        </div>
+
+        {{ .Content }}
+    </article>
+
+    {{template "footer"}}
+</body>
+</html>
+{{template "scripts"}}
