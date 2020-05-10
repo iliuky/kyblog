@@ -1,6 +1,9 @@
 package viewmodel
 
-import "kyblog/internal/blog/model"
+import (
+	"html/template"
+	"kyblog/internal/blog/model"
+)
 
 // ArticleListModel 文章列表模型
 type ArticleListModel struct {
@@ -25,4 +28,5 @@ type ArticleListItemModel struct {
 type ArticleDetailModel struct {
 	model.Article
 	Date string
+	HTML template.HTML
 }

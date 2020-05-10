@@ -1,10 +1,12 @@
 package http
 
 import (
+	"html/template"
 	"kyblog/internal/blog/viewmodel"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/russross/blackfriday/v2"
 )
 
 func articles(c *gin.Context) {
@@ -46,8 +48,18 @@ func articleDetail(c *gin.Context) {
 	pinyin := c.Param("pinyin")
 	article := srv.GetArticle(pinyin)
 
+	var html template.HTML
+	if article.ContentType == "md" {
+		var buff []byte = []byte(article.Content)
+		output := blackfriday.Run(buff)
+		html = template.HTML(output)
+	} else {
+		html = template.HTML(article.Content)
+	}
+
 	c.HTML(200, "article_detail.html", &viewmodel.ArticleDetailModel{
 		Article: *article,
+		HTML:    html,
 		Date:    time.Unix(article.CreateTime, 0).Format("2006-01-02"),
 	})
 }
