@@ -1,8 +1,6 @@
 package common
 
 import (
-	"kyblog/internal/orm"
-
 	"github.com/BurntSushi/toml"
 )
 
@@ -15,7 +13,7 @@ type ServerConfig struct {
 type BaseAppSettings struct {
 	HTTPServer *ServerConfig
 	// orm
-	ORM *orm.Config
+	ORM *OrmConfig
 }
 
 // Load 加载配置文件

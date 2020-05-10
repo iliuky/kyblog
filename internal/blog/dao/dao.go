@@ -1,7 +1,7 @@
 package dao
 
 import (
-	"kyblog/internal/orm"
+	"kyblog/internal/common"
 
 	"github.com/jinzhu/gorm"
 )
@@ -12,9 +12,9 @@ type Dao struct {
 }
 
 // NewDao def
-func NewDao(config *orm.Config) (d *Dao) {
+func NewDao(config *common.OrmConfig) (d *Dao) {
 	d = &Dao{
-		DB: orm.NewOrm(config),
+		DB: common.NewOrm(config),
 	}
 	return
 }

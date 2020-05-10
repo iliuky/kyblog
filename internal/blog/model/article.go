@@ -11,6 +11,7 @@ type Article struct {
 	Status      int32  `gorm:"type:int;not null;default:0;comment:'状态: 0 正常, 1 删除 2 草稿箱'"`
 	CreateTime  int64  `gorm:"type:int;not null;default:0;column:ctime"`
 	ModifyTime  int64  `gorm:"type:int;not null;default:0;"`
+	StaticTime  int64  `gorm:"type:int;not null;default:0;comment:'页面静态化时间'"`
 }
 
 // ArticleType 文章分类表

@@ -7,4 +7,4 @@
     active = 5
     idle = 5
     idleTimeout = 240
-    LogMode = false
+    LogMode = true

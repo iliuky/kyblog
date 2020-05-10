@@ -39,7 +39,7 @@ func InitResources(router *gin.Engine) {
 
 // InitRouting 初始化路由
 func InitRouting(router *gin.Engine) {
-	g := router.Group("/", middleware.PageStatic())
+	g := router.Group("/", middleware.PageStatic(srv))
 	{
 		g.GET("/", articles)
 		g.GET("/a/:pinyin", articleDetail)

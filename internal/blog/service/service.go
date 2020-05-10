@@ -3,7 +3,7 @@ package service
 import (
 	"kyblog/internal/blog/dao"
 	"kyblog/internal/blog/model"
-	"kyblog/internal/orm"
+	"kyblog/internal/common"
 
 	"github.com/jinzhu/gorm"
 )
@@ -15,7 +15,7 @@ type Service struct {
 }
 
 // NewService 创建一个服务
-func NewService(config *orm.Config) (s *Service) {
+func NewService(config *common.OrmConfig) (s *Service) {
 	s = &Service{
 		dao: dao.NewDao(config),
 	}

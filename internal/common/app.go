@@ -84,6 +84,7 @@ func (app *App) Stop() {
 		}
 	}
 	app.Logger.Warn("程序退出")
+	app.Logger.Sync()
 }
 
 // UseEndpoints 使用站点路由配置

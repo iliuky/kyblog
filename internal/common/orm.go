@@ -1,4 +1,4 @@
-package orm
+package common
 
 import (
 	"log"
@@ -7,8 +7,8 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-// Config mysql config.
-type Config struct {
+// OrmConfig mysql config.
+type OrmConfig struct {
 	DBType      string // 数据库类型
 	DSN         string // 数据库连接
 	Active      int    // pool
@@ -18,7 +18,7 @@ type Config struct {
 }
 
 // NewOrm 创建数据库gorm
-func NewOrm(c *Config) (db *gorm.DB) {
+func NewOrm(c *OrmConfig) (db *gorm.DB) {
 	db, err := gorm.Open(c.DBType, c.DSN)
 	if err != nil {
 		log.Panic(c.DSN, err)
