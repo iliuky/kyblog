@@ -1,2 +1,10 @@
 [HTTPServer]
     addr = "localhost:80"
+
+[orm]
+    dbtype = "mysql"
+    dsn = "root:123456@tcp(localhost:3306)/blog?parseTime=true&loc=Local&charset=utf8mb4"
+    active = 5
+    idle = 5
+    idleTimeout = 240
+    LogMode = false
